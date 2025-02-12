@@ -59,9 +59,19 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // Close mobile menu when clicking outside
         document.addEventListener('click', (e) => {
-            if (!menuToggle.contains(e.target) && !mobileMenu.contains(e.target)) {
+            const mobileMenu = document.getElementById('mobile-menu');
+            const menuButton = document.querySelector('button[onclick="toggleMenu()"]');
+            
+            if (mobileMenu && !mobileMenu.contains(e.target) && !menuButton.contains(e.target)) {
                 mobileMenu.classList.add('hidden');
             }
         });
     }
-}); 
+});
+
+function toggleMenu() {
+    const mobileMenu = document.getElementById('mobile-menu');
+    if (mobileMenu) {
+        mobileMenu.classList.toggle('hidden');
+    }
+} 

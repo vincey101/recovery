@@ -18,11 +18,13 @@
                 </a>
                 
                 <!-- Hamburger Menu Button (visible on mobile) -->
-                <button id="menu-toggle" class="md:hidden text-gray-600 hover:text-[#ED563B] focus:outline-none">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
-                    </svg>
-                </button>
+                <div class="md:hidden">
+                    <button onclick="toggleMenu()" class="text-gray-600 hover:text-[#ED563B] focus:outline-none">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                        </svg>
+                    </button>
+                </div>
 
                 <!-- Desktop Navigation (hidden on mobile) -->
                 <nav class="hidden md:block">
@@ -43,23 +45,23 @@
                 </nav>
             </div>
 
-            <!-- Mobile Navigation Menu (hidden by default) -->
-            <nav id="mobile-menu" class="hidden md:hidden fixed left-0 right-0 top-[72px] bg-white border-t border-gray-200 shadow-lg z-40 w-full">
-                <ul class="flex flex-col py-4">
+            <!-- Mobile Navigation Menu -->
+            <div id="mobile-menu" class="hidden md:hidden bg-white w-full absolute left-0 top-full border-t border-gray-200 shadow-lg">
+                <ul class="py-4">
                     <li class="border-b border-gray-100">
-                        <a href="#home" class="block px-6 py-3 text-[#ED563B] hover:text-black hover:bg-gray-50 transition-colors duration-300">Home</a>
+                        <a href="#home" onclick="toggleMenu()" class="block px-6 py-3 text-[#ED563B] hover:text-black hover:bg-gray-50 transition-colors duration-300">Home</a>
                     </li>
                     <li class="border-b border-gray-100">
-                        <a href="#about" class="block px-6 py-3 text-[#ED563B] hover:text-black hover:bg-gray-50 transition-colors duration-300">About</a>
+                        <a href="#about" onclick="toggleMenu()" class="block px-6 py-3 text-[#ED563B] hover:text-black hover:bg-gray-50 transition-colors duration-300">About</a>
                     </li>
                     <li class="border-b border-gray-100">
-                        <a href="#reviews" class="block px-6 py-3 text-[#ED563B] hover:text-black hover:bg-gray-50 transition-colors duration-300">Reviews</a>
+                        <a href="#reviews" onclick="toggleMenu()" class="block px-6 py-3 text-[#ED563B] hover:text-black hover:bg-gray-50 transition-colors duration-300">Reviews</a>
                     </li>
                     <li>
-                        <a href="#contact" class="block px-6 py-3 text-[#ED563B] hover:text-black hover:bg-gray-50 transition-colors duration-300">Contact</a>
+                        <a href="#contact" onclick="toggleMenu()" class="block px-6 py-3 text-[#ED563B] hover:text-black hover:bg-gray-50 transition-colors duration-300">Contact</a>
                     </li>
                 </ul>
-            </nav>
+            </div>
         </div>
     </header>
 
