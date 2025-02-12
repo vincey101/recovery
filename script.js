@@ -23,29 +23,27 @@ document.addEventListener('DOMContentLoaded', () => {
     
     if (contactForm) {
         contactForm.addEventListener('submit', (e) => {
-            const email = document.getElementById('email').value;
+            e.preventDefault(); // Prevent default form submission
             const message = document.getElementById('message').value;
             
-            // Format the mailto link with only the message
+            // Format the mailto link with only the message content
             const mailtoLink = `mailto:definite.egret.wcbn@letterguard.net?subject=Contact Form Submission&body=${encodeURIComponent(message)}`;
             
-            // Update the form action
-            contactForm.action = mailtoLink;
+            // Open email client
+            window.location.href = mailtoLink;
 
             // Show toast notification
             const toast = document.getElementById('toast');
             if (toast) {
                 // Show the toast
-                toast.classList.remove('translate-y-full', 'opacity-0');
+                toast.classList.remove('-translate-y-full', 'opacity-0');
                 
                 // Reset form
-                setTimeout(() => {
-                    contactForm.reset();
-                }, 100);
+                contactForm.reset();
 
                 // Hide the toast after 3 seconds
                 setTimeout(() => {
-                    toast.classList.add('translate-y-full', 'opacity-0');
+                    toast.classList.add('-translate-y-full', 'opacity-0');
                 }, 3000);
             }
         });
