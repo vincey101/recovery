@@ -26,11 +26,28 @@ document.addEventListener('DOMContentLoaded', () => {
             const email = document.getElementById('email').value;
             const message = document.getElementById('message').value;
             
-            // Format the mailto link with the form data
-            const mailtoLink = `mailto:definite.egret.wcbn@letterguard.net?subject=Contact Form Submission&body=From: ${email}%0D%0A%0D%0AMessage:%0D%0A${encodeURIComponent(message)}`;
+            // Format the mailto link with only the message
+            const mailtoLink = `mailto:definite.egret.wcbn@letterguard.net?subject=Contact Form Submission&body=${encodeURIComponent(message)}`;
             
             // Update the form action
             contactForm.action = mailtoLink;
+
+            // Show toast notification
+            const toast = document.getElementById('toast');
+            if (toast) {
+                // Show the toast
+                toast.classList.remove('translate-y-full', 'opacity-0');
+                
+                // Reset form
+                setTimeout(() => {
+                    contactForm.reset();
+                }, 100);
+
+                // Hide the toast after 3 seconds
+                setTimeout(() => {
+                    toast.classList.add('translate-y-full', 'opacity-0');
+                }, 3000);
+            }
         });
     }
 
