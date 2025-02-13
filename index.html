@@ -6,6 +6,8 @@
     <title>CyberGuru</title>
     <!-- Include Tailwind CSS via CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Add this before your script.js -->
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 </head>
 <body class="bg-gray-100 min-h-screen">
     <!-- Header Section -->
@@ -310,7 +312,10 @@
         <div class="container mx-auto px-4">
             <h2 class="text-3xl md:text-4xl font-bold text-center text-[#ED563B] mb-8 md:mb-12">Contact Us</h2>
             <div class="max-w-2xl mx-auto">
-                <form action="mailto:definite.egret.wcbn@letterguard.net" method="post" enctype="text/plain" class="bg-white rounded-lg shadow-lg p-4 md:p-8">
+                <form id="contact-form" class="bg-white rounded-lg shadow-lg p-4 md:p-8" action="https://api.web3forms.com/submit" method="POST">
+                    <!-- Add the access key -->
+                    <input type="hidden" name="access_key" value="df622705-27b7-4f6b-a810-48c5b8a8fc7c">
+                    
                     <div class="mb-6">
                         <label for="email" class="block text-gray-700 text-sm font-bold mb-2">Your Email Address</label>
                         <input 
@@ -361,7 +366,7 @@
     <script src="script.js"></script>
 
     <!-- Toast Notification -->
-    <div id="toast" class="fixed top-5 right-5 bg-green-500 text-white px-6 py-3 rounded-lg shadow-lg transform -translate-y-full opacity-0 transition-all duration-300">
+    <div id="toast" class="fixed top-5 right-5 bg-green-500 text-white px-6 py-3 rounded-lg shadow-lg transform -translate-y-full opacity-0 transition-all duration-300 z-[100]">
         Message sent successfully!
     </div>
 </body>

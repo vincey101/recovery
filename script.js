@@ -1,10 +1,4 @@
 document.addEventListener('DOMContentLoaded', () => {
-    const button = document.getElementById('myButton');
-    
-    button.addEventListener('click', () => {
-        alert('Button clicked!');
-    });
-
     // Smooth scrolling for navigation links
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', function (e) {
@@ -19,32 +13,44 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // Form handling
-    const contactForm = document.querySelector('form');
+    const contactForm = document.getElementById('contact-form');
     
     if (contactForm) {
-        contactForm.addEventListener('submit', (e) => {
-            e.preventDefault(); // Prevent default form submission
-            const message = document.getElementById('message').value;
+        contactForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
             
-            // Format the mailto link with only the message content
-            const mailtoLink = `mailto:definite.egret.wcbn@letterguard.net?subject=Contact Form Submission&body=${encodeURIComponent(message)}`;
-            
-            // Open email client
-            window.location.href = mailtoLink;
+            const submitButton = contactForm.querySelector('button[type="submit"]');
+            submitButton.disabled = true;
+            submitButton.textContent = 'Sending...';
 
-            // Show toast notification
-            const toast = document.getElementById('toast');
-            if (toast) {
-                // Show the toast
-                toast.classList.remove('-translate-y-full', 'opacity-0');
-                
-                // Reset form
-                contactForm.reset();
+            try {
+                const formData = new FormData(contactForm);
+                const response = await fetch(contactForm.action, {
+                    method: 'POST',
+                    body: formData
+                });
 
-                // Hide the toast after 3 seconds
-                setTimeout(() => {
-                    toast.classList.add('-translate-y-full', 'opacity-0');
-                }, 3000);
+                const data = await response.json();
+
+                if (data.success) {
+                    // Show success toast
+                    const toast = document.getElementById('toast');
+                    if (toast) {
+                        toast.classList.remove('-translate-y-full', 'opacity-0');
+                        contactForm.reset();
+                        setTimeout(() => {
+                            toast.classList.add('-translate-y-full', 'opacity-0');
+                        }, 3000);
+                    }
+                } else {
+                    throw new Error('Form submission failed');
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                alert('Failed to send message. Please try again.');
+            } finally {
+                submitButton.disabled = false;
+                submitButton.textContent = 'Send Message';
             }
         });
     }
